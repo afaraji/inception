@@ -51,7 +51,7 @@ volumes:
     driver_opts:
       o: bind
       type: none
-      device: /home/path/of/your/folder
+      device: ./requirements/mariadb/data
   wp_html:
     driver: local
     driver_opts:
