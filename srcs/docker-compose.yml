@@ -1,9 +1,9 @@
 version: '3'
 
 services:
-  # Database
+# Database
   db:
-    image: mariadb:10
+    image: mariadb:10 # need to add build .
     volumes:
       - db_data:/var/lib/mysql
     restart: always
@@ -14,7 +14,7 @@ services:
       MYSQL_PASSWORD: wordpress
     networks:
       - wpsite
-  # phpmyadmin
+# phpmyadmin
   phpmyadmin:
     depends_on:
       - db
@@ -27,24 +27,28 @@ services:
       MYSQL_ROOT_PASSWORD: password
     networks:
       - wpsite
-  # Wordpress
+# Wordpress
   wordpress:
     depends_on:
       - db
-    image: wordpress:latest
+    image: wordpress:php7.3-fpm-alpine # need to add build .
     ports:
-      - '8000:80'
+      - '9000:9000'
     restart: always
     volumes:
       - wp_html:/var/www/html
     environment:
+      MYSQL_ROOT_PASSWORD: password
+      WORDPRESS_DB_NAME: wordpress
       WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: wordpress
     networks:
       - wpsite
+# Network setup
 networks:
   wpsite:
+# Volumes setup
 volumes:
   db_data:
     driver: local
@@ -58,3 +62,6 @@ volumes:
       o: bind
       type: none
       device: ./requirements/wordpress/html
+
+
+# sudo docker-compose down --rmi all --> stop all and delete all images
