@@ -45,6 +45,17 @@ services:
       WORDPRESS_DB_PASSWORD: wordpress
     networks:
       - wpsite
+  nginx:
+    build: ./requirements/nginx/
+    container_name: nginx
+    volumes:
+      - wp_html:/www
+    ports:
+      - 443:443
+    links:
+      - wordpress
+    restart: always
+
 # Network setup
 networks:
   wpsite:
