@@ -4,6 +4,7 @@ services:
 # Database
   db:
     image: mariadb:10 # need to add build .
+    container_name: mariadb
     volumes:
       - db_data:/var/lib/mysql
     restart: always
@@ -19,6 +20,7 @@ services:
     depends_on:
       - db
     image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
     restart: always
     ports:
       - '8080:80'
@@ -32,6 +34,7 @@ services:
     depends_on:
       - db
     image: wordpress:php7.3-fpm-alpine # need to add build .
+    container_name: wordpress
     ports:
       - '9000:9000'
     restart: always
@@ -46,6 +49,8 @@ services:
     networks:
       - wpsite
   nginx:
+    depends_on:
+      - wordpress
     build: ./requirements/nginx/
     container_name: nginx
     volumes:
