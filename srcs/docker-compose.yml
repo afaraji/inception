@@ -60,6 +60,8 @@ services:
     links:
       - wordpress
     restart: always
+    networks:
+      - wpsite
 
 # Network setup
 networks:
