@@ -36,7 +36,7 @@ services:
     image: wordpress:php7.3-fpm-alpine # need to add build .
     container_name: wordpress
     ports:
-      - '9000:9000'
+      - '9000:80'
     restart: always
     volumes:
       - wp_html:/var/www/html
