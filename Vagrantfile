@@ -3,6 +3,9 @@
 
 #ENV['VAGRANT_NO_PARALLEL'] = 'yes'
 
+# vagrant plugin install vagrant-vbguest
+# vagrant vbguest
+
 Vagrant.configure("2") do |config|
 	config.vm.define "deb-11" do |afaraji|
 		afaraji.vm.box = "debian/buster64"
@@ -14,7 +17,8 @@ Vagrant.configure("2") do |config|
 			v.customize ["modifyvm", :id, "--memory", 4096]
 			v.customize ["modifyvm", :id, "--cpus", "2"]
 		end
-		afaraji.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "/tmp/id_rsa.pub"
+		#afaraji.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "/tmp/id_rsa.pub"
+		afaraji.vm.synced_folder ".", "/home/vagrant/inception"
 		afaraji.vm.provision "shell", inline: <<-SHELL
 		apt-get update
 		apt-get install -y -q net-tools curl vim

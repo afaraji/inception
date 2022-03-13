@@ -1,5 +1,5 @@
 FROM alpine:3.15
-
+#adduser -u 82 -G www-data  -D www-data
 RUN apk update && \
     apk add nginx openrc --no-cache && \
     adduser -D -g 'www' www && \
