@@ -33,6 +33,14 @@ Vagrant.configure("2") do |config|
 		usermod -aG docker vagrant
 		echo "127.0.0.1	afaraji.1337.ma" >> /etc/hosts
 		echo "127.0.0.1	afaraji.42.fr" >> /etc/hosts
+		echo "127.0.0.1	www.afaraji.1337.ma" >> /etc/hosts
+		echo "127.0.0.1	www.afaraji.42.fr" >> /etc/hosts
+		mkdir /home/afaraji && mkdir /home/afaraji/data && mkdir /home/afaraji/data/wp_data && mkdir /home/afaraji/data/db_data
+		usermod -u 1050 systemd-coredump && groupmod -g 1050 systemd-coredump
+		useradd -u 999 mysql && groupmod -g 999 mysql
+		chown -R mysql:mysql /home/afaraji/data/db_data/
+		usermod -u 82 www-data && groupmod -g 82 www-data
+		chown -R www-data:www-data /home/afaraji/data/wp_data/
 		# useradd -d /home/afaraji -s /bin/bash -p $(perl -e 'print crypt($ARGV[0], "password")' '  ') afaraji
 		# mkdir /home/afaraji/.ssh
 		# cat /tmp/id_rsa.pub >> /home/afaraji/.ssh/authorized_keys
