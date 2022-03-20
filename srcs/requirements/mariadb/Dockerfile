@@ -1,13 +1,13 @@
 FROM alpine:3.15
 
-COPY source dest
+RUN apk add --no-cache mariadb mariadb-client mariadb-server-utils pwgen && \
+    rm -f /var/cache/apk/*
 
-RUN apk add --no-cache mariadb mariadb-client
-
+COPY tools/run.sh /scripts/run.sh
+COPY conf /config
 
 EXPOSE 3306
 
-CMD ["sh", "script.sh"]
+#VOLUME ["/var/lib/mysql"]
 
-
-
+ENTRYPOINT ["/scripts/run.sh"]

@@ -1,11 +1,12 @@
 FROM alpine:3.15
-#adduser -u 82 -G www-data  -D www-data
+
 RUN apk update && \
     apk add nginx openrc --no-cache && \
-    adduser -D -g 'www' www && \
-    mkdir /www && \
-    chown -R www:www /var/lib/nginx && \
-    chown -R www:www /www && \
+    adduser -u 82 -G www-data  -D www-data && \
+    # adduser -D -g 'www' www && \
+    mkdir /var/www/html && \
+    chown -R www-data:www-data /var/lib/nginx && \
+    chown -R www-data:www-data /var/www/html && \
     mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.backup
 
 COPY ./conf/nginx.conf /etc/nginx/nginx.conf
