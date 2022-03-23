@@ -86,7 +86,12 @@ define( 'NONCE_SALT',       getenv_docker('WORDPRESS_NONCE_SALT',       '0260631
 // (See also https://wordpress.stackexchange.com/a/152905/199287)
 
 /**#@-*/
-
+define( 'WP_REDIS_HOST', 'redis' );
+define( 'WP_REDIS_PORT', 6379 );
+// define( 'WP_REDIS_PASSWORD', 'password' );
+define( 'WP_REDIS_TIMEOUT', 1 );
+define( 'WP_REDIS_READ_TIMEOUT', 1 );
+define( 'WP_REDIS_DATABASE', 0 );
 /**
  * WordPress database table prefix.
  *

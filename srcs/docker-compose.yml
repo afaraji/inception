@@ -9,7 +9,7 @@ services:
     container_name: phpmyadmin
     restart: always
     ports:
-      - '8080:80'
+      - '8880:80'
     # environment:
     #   PMA_HOST: db
     #   MYSQL_ROOT_PASSWORD: password
@@ -69,6 +69,31 @@ services:
       - wp_html:/var/www/html
     ports:
       - 443:443
+    restart: always
+    env_file:
+      - .env
+    networks:
+      - wpsite
+
+# redis
+  redis:
+    build: ./requirements/bonus/redis/
+    image: redis
+    container_name: redis
+    ports:
+      - 6379:6379
+    restart: always
+    env_file:
+      - .env
+    networks:
+      - wpsite
+# adminer
+  adminer:
+    build: ./requirements/bonus/adminer/
+    image: adminer
+    container_name: adminer
+    ports:
+      - 8080:8080
     restart: always
     env_file:
       - .env
