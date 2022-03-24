@@ -100,6 +100,22 @@ services:
     networks:
       - wpsite
 
+# ftp-server
+  ftp:
+    build: ./requirements/bonus/ftp/
+    image: ftp
+    container_name: ftp
+    ports:
+      - 20:20
+      - 21:21
+    volumes:
+      - wp_html:/var/www/html
+    restart: always
+    env_file:
+      - .env
+    networks:
+      - wpsite
+
 # Network setup
 networks:
   wpsite:
