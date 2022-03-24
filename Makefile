@@ -18,7 +18,7 @@ stop:
 	docker-compose -f $(DOCKER_COMPOSE_FILE) stop
 
 down:
-	docker-compose -f $(DOCKER_COMPOSE_FILE) down
+	docker-compose -f $(DOCKER_COMPOSE_FILE) down --remove-orphans
 
 clean:
 	-@docker rmi			mariadb wordpress nginx 2>/dev/null || true
